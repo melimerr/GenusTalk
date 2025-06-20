@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login ke GenusTalks</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="login-card">
+      <h2>Login ke <span class="brand">GenusTalks</span></h2>
+
+      <form action="login.php" method="POST">
+        <div class="input-group">
+          <input type="text" name="username" placeholder="Username atau Email" required />
+        </div>
+        <div class="input-group">
+          <input type="password" name="password" id="password" placeholder="Password" required />
+          <span class="toggle-password" onclick="togglePassword()">👁️</span>
+        </div>
+        <button type="submit" class="login-btn">Login</button>
+      </form>
+
+      <div class="extra-links">
+        <a href="lupa_password.php">Lupa Password?</a>
+        <p>Belum punya akun? <a href="register.html">Daftar di sini</a></p>
+      </div>
+
+      <footer>
+        <p>© 2025 <strong>GenusTalks</strong>. All rights reserved.</p>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const pwField = document.getElementById("password");
+      pwField.type = pwField.type === "password" ? "text" : "password";
+    }
+  </script>
+</body>
+</html>

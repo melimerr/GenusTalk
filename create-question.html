@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buat Pertanyaan - GenusTalks</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h1 class="logo">GenusTalks</h1>
+  </div>
+  
+  <nav class="menu">
+    <a href="dashboard.html">
+      <i data-feather="home"></i>
+      <span>Home</span>
+    </a>
+    <a href="categories.html">
+      <i data-feather="book-open"></i>
+      <span>Categories</span>
+    </a>
+    <a href="recent.html">
+      <i data-feather="clock"></i>
+      <span>Recent</span>
+    </a>
+    <a href="popular.html">
+      <i data-feather="trending-up"></i>
+      <span>Popular</span>
+    </a>
+  </nav>
+
+  <!-- Logout button at the bottom -->
+  <div class="sidebar-footer">
+    <button class="signout-btn">Sign Out</button>
+  </div>
+</aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <div class="topbar">
+        <div class="topbar-left">
+          <button class="toggle-sidebar icon-btn" id="toggleSidebarBtn">☰</button>
+          <button class="create-btn" onclick="location.href='create-question.html'">Create Question</button>
+        </div>
+
+        <div class="topbar-center">
+          <input type="text" class="search-bar" placeholder="Cari di GenusTalks..." />
+        </div>
+
+        <div class="topbar-right">
+          <button class="darkmode-toggle icon-btn" id="darkModeBtn">🌙</button>
+          <img src="profile.jpg" alt="User" class="profile-img" />
+        </div>
+      </div>
+
+      <!-- Create Question Form -->
+      <div class="create-form">
+        <h2>Buat Pertanyaan</h2>
+        <form action="#" method="post">
+          <label for="title">Judul Pertanyaan</label>
+          <input type="text" id="title" name="title" placeholder="Contoh: Bagaimana cara belajar JavaScript dengan efektif?" required />
+
+          <label for="description">Deskripsi</label>
+          <textarea id="description" name="description" placeholder="Tuliskan detail pertanyaan kamu di sini..." required></textarea>
+
+          <label for="tags">Tag</label>
+          <input type="text" id="tags" name="tags" placeholder="Contoh: #javascript #belajar" />
+          <div class="tags-note">Gunakan tanda koma atau spasi untuk memisahkan tag.</div>
+
+          <button type="submit" class="create-btn" style="margin-top: 20px;">Kirim Pertanyaan</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <!-- Toggle Sidebar & Darkmode -->
+  <script>
+    const toggleBtn = document.getElementById('toggleSidebarBtn');
+    const sidebar = document.getElementById('sidebar');
+    const container = document.querySelector('.container');
+    const darkModeBtn = document.getElementById('darkModeBtn');
+
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('hidden');
+      container.classList.toggle('full-width');
+
+      // Ganti warna tombol ☰
+      toggleBtn.style.color = sidebar.classList.contains('hidden') ? '#7a0029' : 'white';
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const isDark = localStorage.getItem('darkMode') === 'true';
+      if (isDark) {
+        document.body.classList.add('dark');
+        darkModeBtn.textContent = '☀️';
+      }
+    });
+
+    darkModeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      localStorage.setItem('darkMode', isDark);
+      darkModeBtn.textContent = isDark ? '☀️' : '🌙';
+    });
+  </script>
+
+  <script>
+  feather.replace();
+</script>
+
+</body>
+</html>

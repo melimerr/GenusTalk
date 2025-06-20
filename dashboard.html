@@ -1,0 +1,207 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+  header("Location: login.html");
+  exit;
+}
+$username = $_SESSION['username'];
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GenusTalks Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h1 class="logo">GenusTalks</h1>
+      </div>
+      
+      <nav class="menu">
+        <a href="dashboard.php">
+          <i data-feather="home"></i>
+          <span>Home</span>
+        </a>
+        <a href="categories.html">
+          <i data-feather="book-open"></i>
+          <span>Categories</span>
+        </a>
+        <a href="recent.html">
+          <i data-feather="clock"></i>
+          <span>Recent</span>
+        </a>
+        <a href="popular.html">
+          <i data-feather="trending-up"></i>
+          <span>Popular</span>
+        </a>
+      </nav>
+
+      <!-- Logout button at the bottom -->
+      <div class="sidebar-footer">
+        <button class="signout-btn">Sign Out</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <div class="topbar">
+        <div class="topbar-left">
+          <button class="toggle-sidebar icon-btn" id="toggleSidebarBtn">☰</button>
+          <button class="create-btn" onclick="location.href='create-question.html'">Create Question</button>
+        </div>
+
+        <div class="topbar-center">
+          <input type="text" id="searchInput" class="search-bar" placeholder="Cari di GenusTalks..." />
+          <button id="searchBtn" class="icon-btn" aria-label="Search">
+            <i data-feather="search"></i>
+          </button>
+        </div>
+
+        <div class="topbar-right">
+          <button class="darkmode-toggle icon-btn" id="darkModeBtn">🌙</button>
+          <img src="profile.jpg" alt="User" class="profile-img" />
+        </div>
+      </div>
+
+      <!-- ✅ Tambahan ucapan selamat datang -->
+      <div class="welcome" style="padding: 20px; font-weight: bold; font-size: 18px;">
+        Selamat datang, <?php echo htmlspecialchars($username); ?>!
+      </div>
+
+      <!-- Post 1 -->
+      <div class="question-card">
+        <div class="post">
+          <div class="user-info">
+            <img src="avatar1.jpeg" alt="Walid" class="avatar" />
+            <div>
+              <div class="username">Walid</div>
+              <div class="time">3 jam yang lalu</div>
+            </div>
+          </div>
+          <div class="question">
+            <h3><strong>Gimana Cara kelola waktu antara kuliah dan juga freelance?</strong></h3>
+            <p>Belakangan sering kewalahan banget atur waktu antara tugas kuliah sama freelance Graphic design. Ada tips gak temen-temen?</p>
+          </div>
+          <div class="tags">
+            <span>#manajemenwaktu</span>
+            <span>#mahasiswa</span>
+            <span>#freelance</span>
+          </div>
+          <div class="post-actions">
+            <span>🔍 1 Jawaban</span>
+            <span>🔁 Repost</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 2 -->
+      <div class="question-card">
+        <div class="post">
+          <div class="user-info">
+            <img src="avatar2.jpeg" alt="Dewi" class="avatar" />
+            <div>
+              <div class="username">Dewi</div>
+              <div class="time">3 jam yang lalu</div>
+            </div>
+          </div>
+          <div class="question">
+            <h3><strong>Apa rekomendasi Laptop buat mahasiswa yang affordable?</strong></h3>
+            <p>Lagi struggle cari laptop yang murah tapi masih good condition dan bisa dipake beberapa tahun lagi. Kira-kira ada yang punya rekomendasi gak?</p>
+          </div>
+          <div class="tags">
+            <span>#laptop</span>
+            <span>#mahasiswa</span>
+            <span>#teknologi</span>
+          </div>
+          <div class="post-actions">
+            <span>🔍 3 Jawaban</span>
+            <span>🔁 Repost</span>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Script Feather Icon -->
+  <script>
+    feather.replace();
+  </script>
+
+  <!-- Script Sidebar & Darkmode -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById('toggleSidebarBtn');
+      const sidebar = document.getElementById('sidebar');
+      const container = document.querySelector('.container');
+      const darkModeBtn = document.getElementById('darkModeBtn');
+
+      const isDark = localStorage.getItem('darkMode') === 'true';
+      if (isDark) {
+        document.body.classList.add('dark');
+        darkModeBtn.textContent = '☀️';
+      }
+
+      toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('hidden');
+        container.classList.toggle('full-width');
+        toggleBtn.style.color = '#7a0029';
+      });
+
+      darkModeBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        const isDark = document.body.classList.contains('dark');
+        localStorage.setItem('darkMode', isDark);
+        darkModeBtn.textContent = isDark ? '☀️' : '🌙';
+      });
+    });
+  </script>
+
+  <!-- Script Search -->
+  <script>
+    const searchBtn = document.getElementById('searchBtn');
+    const searchInput = document.getElementById('searchInput');
+
+    function filterQuestions() {
+      const keyword = searchInput.value.toLowerCase();
+      const questions = document.querySelectorAll('.question-card');
+
+      questions.forEach((card) => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(keyword) ? 'block' : 'none';
+      });
+    }
+
+    searchBtn.addEventListener('click', filterQuestions);
+    searchInput.addEventListener('keyup', function(e) {
+      if (e.key === 'Enter') {
+        filterQuestions();
+      }
+    });
+  </script>
+
+  <!-- Highlight Active Sidebar Menu -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPage = window.location.pathname.split('/').pop();
+      const links = document.querySelectorAll('.menu a');
+
+      links.forEach(link => {
+        const linkPage = link.getAttribute('href');
+        if (linkPage === currentPage || (currentPage === '' && linkPage === 'dashboard.php')) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

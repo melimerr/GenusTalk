@@ -1,0 +1,149 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+  header("Location: login.html");
+  exit;
+}
+?>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GenusTalks - Popular Questions</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h1 class="logo">GenusTalks</h1>
+  </div>
+  
+  <nav class="menu">
+    <a href="dashboard.php">
+      <i data-feather="home"></i>
+      <span>Home</span>
+    </a>
+    <a href="categories.php">
+      <i data-feather="book-open"></i>
+      <span>Categories</span>
+    </a>
+    <a href="recent.php">
+      <i data-feather="clock"></i>
+      <span>Recent</span>
+    </a>
+    <a href="popular.php">
+      <i data-feather="trending-up"></i>
+      <span>Popular</span>
+    </a>
+  </nav>
+
+  <!-- Logout button at the bottom -->
+  <div class="sidebar-footer">
+    <button class="signout-btn">Sign Out</button>
+  </div>
+</aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Topbar -->
+      <div class="topbar">
+        <div class="topbar-left">
+          <button class="toggle-sidebar icon-btn" id="toggleSidebarBtn">☰</button>
+          <button class="create-btn" onclick="location.href='create-question.html'">Create Question</button>
+        </div>
+        <div class="topbar-center">
+          <input type="text" class="search-bar" placeholder="Cari pertanyaan populer..." />
+        </div>
+        <div class="topbar-right">
+          <button class="darkmode-toggle icon-btn" id="darkModeBtn">🌙</button>
+          <img src="profile.jpg" alt="User" class="profile-img" />
+        </div>
+      </div>
+
+      <!-- Popular Questions -->
+      <section class="popular-questions">
+        <h2>Pertanyaan Populer</h2>
+        <div class="question-card">
+          <h3>📌 Apa skill paling penting untuk sukses di dunia kerja saat ini?</h3>
+          <p>Banyak orang bilang soft skill penting, tapi seberapa besar pengaruhnya dibandingkan skill teknis?</p>
+          <div class="meta">
+            <span>👤 Ilham</span> • <span>👍 230 upvotes</span>
+          </div>
+          <div class="tags">
+            <span>#karir</span>
+            <span>#softskill</span>
+            <span>#worklife</span>
+          </div>
+        </div>
+
+        <div class="question-card">
+          <h3>📌 Bagaimana cara bangkit dari kegagalan bisnis pertama?</h3>
+          <p>Baru gagal startup pertama dan cukup down. Ingin bangkit, ada yang pernah punya pengalaman serupa?</p>
+          <div class="meta">
+            <span>👤 Anisa</span> • <span>👍 192 upvotes</span>
+          </div>
+          <div class="tags">
+            <span>#motivasi</span>
+            <span>#startup</span>
+            <span>#pengalaman</span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Script -->
+  <script>
+    const toggleBtn = document.getElementById('toggleSidebarBtn');
+    const sidebar = document.getElementById('sidebar');
+    const container = document.querySelector('.container');
+    const darkModeBtn = document.getElementById('darkModeBtn');
+
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('hidden');
+      container.classList.toggle('full-width');
+      toggleBtn.style.color = sidebar.classList.contains('hidden') ? '#7a0029' : 'white';
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const isDark = localStorage.getItem('darkMode') === 'true';
+      if (isDark) {
+        document.body.classList.add('dark');
+        darkModeBtn.textContent = '☀️';
+      }
+    });
+
+    darkModeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      localStorage.setItem('darkMode', isDark);
+      darkModeBtn.textContent = isDark ? '☀️' : '🌙';
+    });
+  </script>
+
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <script>
+  feather.replace();
+</script>
+
+<script>
+  const menuLinks = document.querySelectorAll('.menu a');
+  const currentPage = window.location.pathname.split("/").pop(); // ambil nama file (misalnya: categories.html)
+
+  menuLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === currentPage || (href === 'index.html' && currentPage === '')) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>

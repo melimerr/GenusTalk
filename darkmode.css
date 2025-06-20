@@ -1,0 +1,164 @@
+:root {
+  --bg-dark: #1e1e2f;
+  --bg-card: #2a2a3d;
+  --text-light: #f1f1f1;
+  --text-muted: #b0b0b0;
+  --accent: #800020; /* Burgundy */
+  --accent-light: #a52a2a;
+  --border-color: #3c3c4f;
+  --hover-bg: #33334d;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding: 20px;
+}
+
+.question-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  transition: background-color 0.3s ease;
+}
+
+.question-card:hover {
+  background-color: var(--hover-bg);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+  border: 2px solid var(--accent);
+}
+
+.username {
+  font-weight: 600;
+  color: var(--accent-light);
+}
+
+.time {
+  font-size: 0.85em;
+  color: var(--text-muted);
+}
+
+.question h3 {
+  margin: 0 0 8px 0;
+  color: var(--text-light);
+}
+
+.question p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.tags {
+  margin-top: 12px;
+}
+
+.tags span {
+  display: inline-block;
+  background-color: var(--accent-light);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.85em;
+  margin-right: 6px;
+  margin-bottom: 4px;
+}
+
+.post-actions {
+  margin-top: 16px;
+  font-size: 0.9em;
+  color: var(--text-muted);
+  display: flex;
+  gap: 16px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.icon-btn:hover {
+  background-color: var(--hover-bg);
+}
+
+/* Search bar (if used elsewhere) */
+.search-bar {
+  background-color: var(--bg-card);
+  color: var(--text-light);
+  border: 1px solid var(--border-color);
+  padding: 10px 14px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.search-bar::placeholder {
+  color: var(--text-muted);
+}
+
+/* FORM input dan textarea */
+.dark-mode input,
+.dark-mode textarea {
+  background-color: #222;
+  color: #eee;
+  border: 1px solid #555;
+}
+
+/* Label dan placeholder */
+.dark-mode input::placeholder,
+.dark-mode textarea::placeholder {
+  color: #aaa;
+}
+
+.dark-mode label {
+  color: #ddd;
+}
+
+/* Komentar: kotak jawaban dan avatar area */
+.dark-mode .answer-item {
+  background-color: #2c2c2c;
+  color: #f1f1f1;
+  border: 1px solid #444;
+}
+
+.dark-mode .user-info .username,
+.dark-mode .user-info .waktu-jawab {
+  color: #ccc;
+}
+
+.dark-mode .answers-list h4 {
+  color: #ddd;
+}
+
+/* Optional - border atau shadow untuk sedikit efek */
+.dark-mode .answer-item {
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 12px;
+}

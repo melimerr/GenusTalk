@@ -1,0 +1,142 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #fff;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  background-color: #7a0029;
+  color: #fff;
+  padding: 20px 0;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+nav a {
+  margin-left: 15px;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.btn {
+  background-color: #fff;
+  color: #7a0029;
+}
+
+.btn-outline {
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.btn:hover,
+.btn-outline:hover {
+  background-color: #fff;
+  color: #7a0029;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+  background: #fce4ec;
+}
+
+.hero h2 {
+  font-size: 36px;
+  color: #7a0029;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-large {
+  padding: 15px 30px;
+  background-color: #7a0029;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-large:hover {
+  background-color: #5a001f;
+}
+
+/* Features */
+.features {
+  padding: 60px 20px;
+  background: #fff;
+}
+
+.features h3 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 28px;
+  color: #7a0029;
+}
+
+.feature-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.feature-item {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.feature-item h4 {
+  margin-bottom: 10px;
+  color: #7a0029;
+}
+
+/* Footer */
+footer {
+  background-color: #f4f4f4;
+  padding: 20px 0;
+  text-align: center;
+  color: #777;
+  font-size: 14px;
+}

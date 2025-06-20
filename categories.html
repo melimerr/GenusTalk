@@ -1,0 +1,177 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+  header("Location: login.html");
+  exit;
+}
+?>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GenusTalks - Categories</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h1 class="logo">GenusTalks</h1>
+  </div>
+  
+  <nav class="menu">
+    <a href="dashboard.php">
+      <i data-feather="home"></i>
+      <span>Home</span>
+    </a>
+    <a href="categories.html">
+      <i data-feather="book-open"></i>
+      <span>Categories</span>
+    </a>
+    <a href="recent.html">
+      <i data-feather="clock"></i>
+      <span>Recent</span>
+    </a>
+    <a href="popular.html">
+      <i data-feather="trending-up"></i>
+      <span>Popular</span>
+    </a>
+  </nav>
+
+  <!-- Logout button at the bottom -->
+  <div class="sidebar-footer">
+    <button class="signout-btn">Sign Out</button>
+  </div>
+</aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Topbar -->
+      <div class="topbar">
+        <div class="topbar-left">
+          <button class="toggle-sidebar icon-btn" id="toggleSidebarBtn">☰</button>
+          <button class="create-btn" onclick="location.href='create-question.html'">Create Question</button>
+        </div>
+        <div class="topbar-center">
+  <input type="text" id="searchInput" class="search-bar" placeholder="Cari di Categories..." />
+  <button id="searchBtn" class="icon-btn" aria-label="Search">
+    <i data-feather="search"></i>
+  </button>
+</div>
+        <div class="topbar-right">
+          <button class="darkmode-toggle icon-btn" id="darkModeBtn">🌙</button>
+          <img src="profile.jpg" alt="User" class="profile-img" />
+        </div>
+      </div>
+
+      <!-- Categories List -->
+      <section class="category-list">
+        <h2>Kategori Populer</h2>
+        <div class="categories-grid">
+          <div class="category-card">💻 Teknologi</div>
+          <div class="category-card">🎓 Pendidikan</div>
+          <div class="category-card">💼 Karier</div>
+          <div class="category-card">🎨 Desain</div>
+          <div class="category-card">📈 Bisnis</div>
+          <div class="category-card">⚙️ Pemrograman</div>
+          <div class="category-card">📚 Buku</div>
+          <div class="category-card">🧠 Psikologi</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const toggleBtn = document.getElementById('toggleSidebarBtn');
+    const sidebar = document.getElementById('sidebar');
+    const container = document.querySelector('.container');
+    const darkModeBtn = document.getElementById('darkModeBtn');
+
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('hidden');
+      container.classList.toggle('full-width');
+      toggleBtn.style.color = sidebar.classList.contains('hidden') ? '#7a0029' : 'white';
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const isDark = localStorage.getItem('darkMode') === 'true';
+      if (isDark) {
+        document.body.classList.add('dark');
+        darkModeBtn.textContent = '☀️';
+      }
+    });
+
+    darkModeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      localStorage.setItem('darkMode', isDark);
+      darkModeBtn.textContent = isDark ? '☀️' : '🌙';
+    });
+  </script>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchBtn = document.getElementById("searchBtn");
+    const searchInput = document.getElementById("searchInput");
+
+    function universalSearch() {
+      const keyword = searchInput.value.toLowerCase();
+
+      // Cari di question-card
+      const questionCards = document.querySelectorAll(".question-card");
+      if (questionCards.length > 0) {
+        questionCards.forEach(card => {
+          const text = card.innerText.toLowerCase();
+          card.style.display = text.includes(keyword) ? "block" : "none";
+        });
+      }
+
+      // Cari di category-card
+      const categoryCards = document.querySelectorAll(".category-card");
+      if (categoryCards.length > 0) {
+        categoryCards.forEach(card => {
+          const text = card.innerText.toLowerCase();
+          card.style.display = text.includes(keyword) ? "block" : "none";
+        });
+      }
+    }
+
+    if (searchBtn && searchInput) {
+      searchBtn.addEventListener("click", universalSearch);
+      searchInput.addEventListener("keyup", (e) => {
+        if (e.key === "Enter") {
+          universalSearch();
+        }
+      });
+    }
+  });
+</script>
+
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <script>
+  feather.replace();
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const currentPage = window.location.pathname.split('/').pop();
+    const links = document.querySelectorAll('.menu a');
+
+    links.forEach(link => {
+      const linkPage = link.getAttribute('href');
+      if (linkPage === currentPage || (currentPage === '' && linkPage === 'dashboard.html')) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
